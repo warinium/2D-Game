@@ -1,0 +1,25 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class CheckPointEnd : MonoBehaviour
+{
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.transform.tag == "Player")
+        {
+            //PlayerManager.lastCheckpointsPos=transform.position;
+            GetComponent<SpriteRenderer>().color = Color.white;
+            AudioManager.instance.Play("StageEnd");
+            //PlayerPrefs.SetInt("NumberOfCoins", PlayerManager.numberOfCoins);
+            int currentSceneIndex=SceneManager.GetActiveScene().buildIndex;
+
+
+            SceneManager.LoadScene((++currentSceneIndex)% SceneManager.sceneCountInBuildSettings);
+            //GameObject selected_player = Instantiate(playerPrefabs[charcterIndex], lastCheckpointsPos, Quaternion.identity);
+            //SceneManager.LoadScene(0);
+        }
+    }
+}
